@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>
+			canvaser
+		</title>
+
+		<style type="text/css">
+			#grapher{
+				border: 2px solid #3399ff;
+				box-shadow: 0 0 3px #3399ff, 0 0 3px #3399ff;
+			}
+			#editor {
+        		position: relative;
+        		width: 500px;
+        		height: 1000px;
+        		display:inline-block;
+    		}
+		</style>
+
+		<script type="text/javascript" src="bin/grapher.js">
+		</script>
+
+		<script type="text/javascript"></script>
+
+		<script src="src/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="src/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+
+    	<script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
+    	<script>
+    		function load(){
+    			for(var i in loader){
+    				loader[i](i);
+    			}
+    		}
+    		var loader=[];
+    		loader.push(function(){
+        		window.editor = ace.edit("editor");
+        		editor.setTheme("ace/theme/twilight");
+    			editor.getSession().setMode("ace/mode/javascript");
+    			editor.setValue("//To do:Type your javascript code here\n//To run:Click the canvas\n//if you want to call the basing API\n//use `this.ctx`\n//if you want to use grapher functions use `this`");
+        	});
+    		loader.push(function(){
+    			grapher.config({element:"grapher"}).updateConfig();
+        	});
+        	function run(){
+        		var str=editor.getValue();
+        		grapher.ev(str);
+        	}
+    	</script>
+	</head>
+	<body onload="load()">
+		<div id="editor"></div>
+		<canvas height="1000" width="700" id="grapher" onclick="run()"></canvas>
+	</body>
+</html>v
